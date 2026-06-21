@@ -4,7 +4,7 @@ Full-stack personal finance tracker built with React, FastAPI, PostgreSQL, and C
 
 ## Current Phase
 
-Phase 4.6 adds a polished app shell with light/dark mode, an add-transaction modal, and a slide-out options menu.
+Phase 5 adds account registration, login, JWT authentication, password hashing, and user-scoped transactions.
 
 ## Backend Setup
 
@@ -49,12 +49,17 @@ alembic upgrade head
 ## API Endpoints
 
 - `GET /health`
+- `POST /auth/register`
+- `POST /auth/login`
+- `GET /auth/me`
 - `POST /transactions`
 - `GET /transactions`
 - `GET /transactions/{transaction_id}`
 - `PATCH /transactions/{transaction_id}`
 - `DELETE /transactions/{transaction_id}`
 - `GET /dashboard/summary`
+
+Transaction and dashboard endpoints require a bearer token after login.
 
 ## Frontend Setup
 

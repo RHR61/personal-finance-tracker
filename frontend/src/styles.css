@@ -70,6 +70,81 @@ main {
   padding: 34px 0;
 }
 
+.auth-shell {
+  display: grid;
+  width: min(520px, calc(100% - 32px));
+  min-height: 100vh;
+  place-items: center;
+}
+
+.auth-card {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  animation: rise-in 420ms ease both;
+}
+
+.auth-mark {
+  display: inline-grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  color: #ffffff;
+  background: #2563eb;
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.22);
+}
+
+.auth-card > p {
+  margin: 0 0 8px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.auth-card h1 {
+  margin: 0 0 18px;
+  color: var(--text-strong);
+  font-size: 2.05rem;
+  line-height: 1.05;
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  margin-bottom: 18px;
+  padding: 4px;
+  background: var(--surface-soft);
+}
+
+.auth-tabs button {
+  min-height: 36px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--text-muted);
+  background: transparent;
+  font-weight: 850;
+}
+
+.auth-tabs button.active {
+  color: #ffffff;
+  background: #2563eb;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+}
+
+.auth-form {
+  display: grid;
+  gap: 14px;
+}
+
 .app-header {
   display: flex;
   align-items: end;
@@ -668,6 +743,15 @@ tbody tr:hover {
 
 .drawer-action svg {
   color: var(--blue);
+}
+
+.drawer-action.danger {
+  color: #b42318;
+  background: #fff1f0;
+}
+
+.drawer-action.danger svg {
+  color: #b42318;
 }
 
 .drawer-note {

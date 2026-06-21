@@ -1,5 +1,5 @@
 import React from "react";
-import { Moon, PlusCircle, RotateCcw, Sun, X } from "lucide-react";
+import { LogOut, Moon, PlusCircle, RotateCcw, Sun, X } from "lucide-react";
 
 export default function AppMenu({
   activeFilterCount,
@@ -8,7 +8,9 @@ export default function AppMenu({
   onClose,
   onResetFilters,
   onToggleTheme,
+  onLogout,
   theme,
+  user,
 }) {
   if (!isOpen) {
     return null;
@@ -23,7 +25,7 @@ export default function AppMenu({
         <div className="drawer-header">
           <div>
             <p>Menu</p>
-            <h2>Options</h2>
+            <h2>{user?.username ?? "Options"}</h2>
           </div>
           <button className="icon-button neutral" onClick={onClose} type="button" aria-label="Close menu">
             <X aria-hidden="true" size={18} />
@@ -52,6 +54,11 @@ export default function AppMenu({
           Reset filters
         </button>
 
+        <button className="drawer-action danger" onClick={onLogout} type="button">
+          <LogOut aria-hidden="true" size={18} />
+          Logout
+        </button>
+
         <div className="drawer-note">
           <span>{activeFilterCount}</span>
           <p>active filters</p>
@@ -60,4 +67,3 @@ export default function AppMenu({
     </div>
   );
 }
-
