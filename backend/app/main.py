@@ -1,3 +1,4 @@
+import os
 from datetime import date, datetime
 
 from fastapi import Depends, FastAPI, HTTPException, Query, status
@@ -27,11 +28,18 @@ from .schemas import (
 
 app = FastAPI(title="Personal Finance Tracker API")
 
+frontend_origins = [
+    origin.strip()
+    for origin in os.getenv("FRONTEND_ORIGINS", "").split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        *frontend_origins,
     ],
     allow_origin_regex=r"http://(localhost|127\.0\.0\.1):\d+",
     allow_credentials=True,
