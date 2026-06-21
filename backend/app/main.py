@@ -1,6 +1,7 @@
 from datetime import date
 
 from fastapi import Depends, FastAPI, HTTPException, Query, status
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -10,6 +11,17 @@ from .schemas import DashboardSummary, TransactionCreate, TransactionRead, Trans
 
 
 app = FastAPI(title="Personal Finance Tracker API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")

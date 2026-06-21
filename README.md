@@ -4,7 +4,7 @@ Full-stack personal finance tracker built with React, FastAPI, PostgreSQL, and C
 
 ## Current Phase
 
-Phase 2 adds PostgreSQL through Docker Compose and Alembic migrations for the users and transactions tables.
+Phase 3 adds a React frontend that connects to the FastAPI transaction and dashboard endpoints.
 
 ## Backend Setup
 
@@ -55,6 +55,26 @@ alembic upgrade head
 - `PATCH /transactions/{transaction_id}`
 - `DELETE /transactions/{transaction_id}`
 - `GET /dashboard/summary`
+
+## Frontend Setup
+
+Install Node.js LTS if `node` or `npm` is not recognized in PowerShell.
+
+Keep the backend running at `http://127.0.0.1:8000`, then start the React app in a second terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend runs at `http://localhost:5173`.
+
+To point the frontend at a different API URL, create `frontend/.env`:
+
+```bash
+VITE_API_BASE_URL=http://127.0.0.1:8000
+```
 
 ## Example Transaction
 
