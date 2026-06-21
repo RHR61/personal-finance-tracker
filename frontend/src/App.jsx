@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import DashboardCharts from "./components/DashboardCharts.jsx";
+import InsightStrip from "./components/InsightStrip.jsx";
 import SummaryCards from "./components/SummaryCards.jsx";
 import TransactionFilters from "./components/TransactionFilters.jsx";
 import TransactionForm from "./components/TransactionForm.jsx";
@@ -103,6 +104,8 @@ export default function App() {
       {error ? <div className="error-banner">{error}</div> : null}
 
       <SummaryCards summary={summary} />
+
+      <InsightStrip summary={summary} transactions={transactions} />
 
       <DashboardCharts transactions={transactions} />
 

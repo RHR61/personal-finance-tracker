@@ -1,4 +1,5 @@
 import { Trash2 } from "lucide-react";
+import React from "react";
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -33,8 +34,8 @@ export default function TransactionTable({ transactions, onDelete }) {
                 </td>
               </tr>
             ) : (
-              transactions.map((transaction) => (
-                <tr key={transaction.id}>
+              transactions.map((transaction, index) => (
+                <tr key={transaction.id} style={{ "--row-index": index }}>
                   <td>{transaction.date}</td>
                   <td>{transaction.category}</td>
                   <td>{transaction.description || "-"}</td>
@@ -64,4 +65,3 @@ export default function TransactionTable({ transactions, onDelete }) {
     </section>
   );
 }
-

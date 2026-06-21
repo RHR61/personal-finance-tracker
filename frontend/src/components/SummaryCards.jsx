@@ -1,9 +1,7 @@
 import { Banknote, TrendingDown, Wallet } from "lucide-react";
+import React from "react";
 
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+import AnimatedCurrency from "./AnimatedCurrency.jsx";
 
 export default function SummaryCards({ summary }) {
   const cards = [
@@ -36,7 +34,9 @@ export default function SummaryCards({ summary }) {
           <article className={`summary-card ${card.tone}`} key={card.label}>
             <div>
               <p>{card.label}</p>
-              <strong>{currency.format(card.value)}</strong>
+              <strong>
+                <AnimatedCurrency value={card.value} />
+              </strong>
             </div>
             <Icon aria-hidden="true" size={24} />
           </article>
@@ -45,4 +45,3 @@ export default function SummaryCards({ summary }) {
     </section>
   );
 }
-

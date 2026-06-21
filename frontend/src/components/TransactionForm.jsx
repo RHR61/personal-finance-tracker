@@ -1,5 +1,5 @@
 import { PlusCircle } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const today = new Date().toISOString().slice(0, 10);
 
@@ -97,4 +97,3 @@ export default function TransactionForm({ onSubmit, isSubmitting }) {
     </form>
   );
 }
-

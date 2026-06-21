@@ -1,4 +1,5 @@
 import { Filter, RotateCcw } from "lucide-react";
+import React from "react";
 
 export default function TransactionFilters({ filters, onChange, onReset }) {
   function updateFilter(event) {
@@ -52,4 +53,3 @@ export default function TransactionFilters({ filters, onChange, onReset }) {
     </section>
   );
 }
-
