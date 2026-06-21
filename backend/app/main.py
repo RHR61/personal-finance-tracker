@@ -4,12 +4,10 @@ from fastapi import Depends, FastAPI, HTTPException, Query, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from .database import Base, engine, get_db
+from .database import get_db
 from .models import Transaction, TransactionType
 from .schemas import DashboardSummary, TransactionCreate, TransactionRead, TransactionUpdate
 
-
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Personal Finance Tracker API")
 
@@ -117,4 +115,3 @@ def get_dashboard_summary(db: Session = Depends(get_db)) -> DashboardSummary:
         total_expenses=total_expenses,
         remaining_balance=total_income - total_expenses,
     )
-

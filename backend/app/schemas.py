@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date as Date
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -10,7 +10,7 @@ class TransactionBase(BaseModel):
     amount: float = Field(gt=0)
     category: str = Field(min_length=1, max_length=50)
     description: str | None = Field(default=None, max_length=255)
-    date: date
+    date: Date
     type: TransactionType
 
 
@@ -23,7 +23,7 @@ class TransactionUpdate(BaseModel):
     amount: float | None = Field(default=None, gt=0)
     category: str | None = Field(default=None, min_length=1, max_length=50)
     description: str | None = Field(default=None, max_length=255)
-    date: date | None = None
+    date: Date | None = None
     type: TransactionType | None = None
 
 
@@ -37,4 +37,3 @@ class DashboardSummary(BaseModel):
     total_income: float
     total_expenses: float
     remaining_balance: float
-
