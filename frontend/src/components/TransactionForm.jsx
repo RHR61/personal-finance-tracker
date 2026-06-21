@@ -11,7 +11,7 @@ const initialForm = {
   type: "expense",
 };
 
-export default function TransactionForm({ onSubmit, isSubmitting }) {
+export default function TransactionForm({ isPanel = true, onSubmit, isSubmitting }) {
   const [form, setForm] = useState(initialForm);
 
   function updateField(event) {
@@ -35,7 +35,7 @@ export default function TransactionForm({ onSubmit, isSubmitting }) {
   }
 
   return (
-    <form className="panel transaction-form" onSubmit={handleSubmit}>
+    <form className={`${isPanel ? "panel " : ""}transaction-form`} onSubmit={handleSubmit}>
       <div className="panel-heading">
         <h2>Add Transaction</h2>
       </div>

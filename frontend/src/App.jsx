@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { Menu, Moon, PlusCircle, Sun } from "lucide-react";
 
+import AppMenu from "./components/AppMenu.jsx";
 import DashboardCharts from "./components/DashboardCharts.jsx";
 import InsightStrip from "./components/InsightStrip.jsx";
 import SummaryCards from "./components/SummaryCards.jsx";
 import TransactionFilters from "./components/TransactionFilters.jsx";
-import TransactionForm from "./components/TransactionForm.jsx";
+import TransactionModal from "./components/TransactionModal.jsx";
 import TransactionTable from "./components/TransactionTable.jsx";
 import {
   createTransaction,
@@ -30,6 +32,9 @@ export default function App() {
   const [filters, setFilters] = useState(emptyFilters);
   const [summary, setSummary] = useState(emptySummary);
   const [transactions, setTransactions] = useState([]);
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") ?? "light");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -62,6 +67,11 @@ export default function App() {
     loadDashboard(filters);
   }, [filters]);
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   async function handleCreateTransaction(transaction) {
     setIsSubmitting(true);
     setError("");
@@ -91,6 +101,10 @@ export default function App() {
     setFilters(emptyFilters);
   }
 
+  function toggleTheme() {
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+  }
+
   return (
     <main>
       <header className="app-header">
@@ -98,7 +112,38 @@ export default function App() {
           <p>Personal Finance Tracker</p>
           <h1>Dashboard</h1>
         </div>
-        <span>{activeFilterCount} active filters</span>
+        <div className="header-actions">
+          <span>{activeFilterCount} active filters</span>
+          <button
+            className="primary-button compact-action"
+            onClick={() => setIsTransactionModalOpen(true)}
+            type="button"
+          >
+            <PlusCircle aria-hidden="true" size={18} />
+            Add
+          </button>
+          <button
+            className="icon-button neutral menu-button"
+            onClick={toggleTheme}
+            type="button"
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {theme === "dark" ? (
+              <Sun aria-hidden="true" size={20} />
+            ) : (
+              <Moon aria-hidden="true" size={20} />
+            )}
+          </button>
+          <button
+            className="icon-button neutral menu-button"
+            onClick={() => setIsMenuOpen(true)}
+            type="button"
+            aria-label="Open menu"
+          >
+            <Menu aria-hidden="true" size={20} />
+          </button>
+        </div>
       </header>
 
       {error ? <div className="error-banner">{error}</div> : null}
@@ -109,8 +154,7 @@ export default function App() {
 
       <DashboardCharts transactions={transactions} />
 
-      <section className="workspace">
-        <TransactionForm onSubmit={handleCreateTransaction} isSubmitting={isSubmitting} />
+      <section className="workspace controls-workspace">
         <TransactionFilters filters={filters} onChange={setFilters} onReset={resetFilters} />
       </section>
 
@@ -119,6 +163,22 @@ export default function App() {
       ) : (
         <TransactionTable transactions={transactions} onDelete={handleDeleteTransaction} />
       )}
+
+      <TransactionModal
+        isOpen={isTransactionModalOpen}
+        isSubmitting={isSubmitting}
+        onClose={() => setIsTransactionModalOpen(false)}
+        onSubmit={handleCreateTransaction}
+      />
+      <AppMenu
+        activeFilterCount={activeFilterCount}
+        isOpen={isMenuOpen}
+        onAddTransaction={() => setIsTransactionModalOpen(true)}
+        onClose={() => setIsMenuOpen(false)}
+        onResetFilters={resetFilters}
+        onToggleTheme={toggleTheme}
+        theme={theme}
+      />
     </main>
   );
 }

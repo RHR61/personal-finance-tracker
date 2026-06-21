@@ -4,7 +4,7 @@ Full-stack personal finance tracker built with React, FastAPI, PostgreSQL, and C
 
 ## Current Phase
 
-Phase 4 adds Chart.js dashboard visuals for spending by category and monthly expense trends.
+Phase 4.6 adds a polished app shell with light/dark mode, an add-transaction modal, and a slide-out options menu.
 
 ## Backend Setup
 
