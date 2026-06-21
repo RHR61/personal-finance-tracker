@@ -449,6 +449,22 @@ select:focus {
   animation-delay: 120ms;
 }
 
+.history-toolbar {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+}
+
+.history-toolbar label {
+  min-width: 190px;
+  gap: 5px;
+  font-size: 0.78rem;
+}
+
+.history-toolbar select {
+  min-height: 36px;
+}
+
 .table-wrap {
   overflow-x: auto;
 }
@@ -784,6 +800,12 @@ tbody tr:hover {
 
   .controls-workspace .filters {
     grid-template-columns: 1fr;
+  }
+
+  .history-toolbar {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
   }
 }
 

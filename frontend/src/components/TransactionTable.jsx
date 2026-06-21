@@ -1,5 +1,5 @@
 import { Trash2 } from "lucide-react";
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -7,11 +7,38 @@ const currency = new Intl.NumberFormat("en-US", {
 });
 
 export default function TransactionTable({ transactions, onDelete }) {
+  const [sortBy, setSortBy] = useState("transactionDate");
+
+  const sortedTransactions = useMemo(() => {
+    return [...transactions].sort((first, second) => {
+      if (sortBy === "dateAdded") {
+        return second.id - first.id;
+      }
+
+      const dateComparison = second.date.localeCompare(first.date);
+
+      if (dateComparison !== 0) {
+        return dateComparison;
+      }
+
+      return second.id - first.id;
+    });
+  }, [sortBy, transactions]);
+
   return (
     <section className="panel history-panel">
       <div className="panel-heading">
         <h2>Transaction History</h2>
-        <span>{transactions.length} total</span>
+        <div className="history-toolbar">
+          <label>
+            Sort by
+            <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
+              <option value="transactionDate">Transaction date</option>
+              <option value="dateAdded">Date added</option>
+            </select>
+          </label>
+          <span>{transactions.length} total</span>
+        </div>
       </div>
 
       <div className="table-wrap">
@@ -34,7 +61,7 @@ export default function TransactionTable({ transactions, onDelete }) {
                 </td>
               </tr>
             ) : (
-              transactions.map((transaction, index) => (
+              sortedTransactions.map((transaction, index) => (
                 <tr key={transaction.id} style={{ "--row-index": index }}>
                   <td>{transaction.date}</td>
                   <td>{transaction.category}</td>
