@@ -1,7 +1,7 @@
 import { Filter, RotateCcw } from "lucide-react";
 import React from "react";
 
-export default function TransactionFilters({ filters, onChange, onReset }) {
+export default function TransactionFilters({ categories, filters, onChange, onReset }) {
   function updateFilter(event) {
     const { name, value } = event.target;
     onChange({ ...filters, [name]: value });
@@ -18,12 +18,11 @@ export default function TransactionFilters({ filters, onChange, onReset }) {
         Category
         <select name="category" onChange={updateFilter} value={filters.category}>
           <option value="">All categories</option>
-          <option>Food</option>
-          <option>Rent</option>
-          <option>Entertainment</option>
-          <option>Transportation</option>
-          <option>Utilities</option>
-          <option>Other</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
         </select>
       </label>
 

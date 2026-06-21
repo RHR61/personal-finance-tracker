@@ -38,9 +38,19 @@ function getLatestTransaction(transactions) {
   return `${latest.category} ${latest.type} on ${latest.date}`;
 }
 
-export default function InsightStrip({ summary, transactions }) {
+function isMovementAccount(source, account) {
+  if (!source.startsWith("account:") || !account) {
+    return false;
+  }
+
+  const subtype = account.subtype ?? "";
+  return ["hsa", "money market", "savings", "investment", "brokerage"].includes(subtype) || account.type === "investment";
+}
+
+export default function InsightStrip({ account, source, summary, transactions }) {
+  const movementAccount = isMovementAccount(source, account);
   const savingsRate =
-    summary.total_income > 0
+    !movementAccount && summary.total_income > 0
       ? Math.round((summary.remaining_balance / summary.total_income) * 100)
       : null;
 
@@ -50,8 +60,12 @@ export default function InsightStrip({ summary, transactions }) {
       label: "Balance Signal",
       value:
         summary.remaining_balance >= 0
-          ? `${currency.format(summary.remaining_balance)} left to allocate`
-          : `${currency.format(Math.abs(summary.remaining_balance))} over income`,
+          ? movementAccount
+            ? `${currency.format(summary.remaining_balance)} net inflow`
+            : `${currency.format(summary.remaining_balance)} left to allocate`
+          : movementAccount
+            ? `${currency.format(Math.abs(summary.remaining_balance))} net outflow`
+            : `${currency.format(Math.abs(summary.remaining_balance))} over income`,
     },
     {
       icon: Trophy,

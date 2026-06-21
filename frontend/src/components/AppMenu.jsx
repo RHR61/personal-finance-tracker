@@ -1,10 +1,11 @@
 import React from "react";
-import { LogOut, Moon, PlusCircle, RotateCcw, Sun, X } from "lucide-react";
+import { Landmark, LogOut, Moon, PlusCircle, RotateCcw, Sun, X } from "lucide-react";
 
 export default function AppMenu({
   activeFilterCount,
   isOpen,
   onAddTransaction,
+  onConnectBank,
   onClose,
   onResetFilters,
   onToggleTheme,
@@ -47,6 +48,18 @@ export default function AppMenu({
         <button className="drawer-action" onClick={onToggleTheme} type="button">
           {isDark ? <Sun aria-hidden="true" size={18} /> : <Moon aria-hidden="true" size={18} />}
           {isDark ? "Switch to light mode" : "Switch to dark mode"}
+        </button>
+
+        <button
+          className="drawer-action"
+          onClick={() => {
+            onConnectBank();
+            onClose();
+          }}
+          type="button"
+        >
+          <Landmark aria-hidden="true" size={18} />
+          Connect bank
         </button>
 
         <button className="drawer-action" onClick={onResetFilters} type="button">

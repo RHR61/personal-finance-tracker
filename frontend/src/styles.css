@@ -197,6 +197,40 @@ main {
   margin-bottom: 16px;
 }
 
+.collapsible-section {
+  margin-bottom: 16px;
+}
+
+.section-toggle {
+  display: flex;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 0 14px;
+  color: var(--text-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-weight: 900;
+  backdrop-filter: blur(16px);
+}
+
+.section-toggle svg {
+  color: var(--text-muted);
+  transition: transform 180ms ease;
+}
+
+.collapsible-section.is-collapsed .section-toggle svg {
+  transform: rotate(-90deg);
+}
+
+.section-body {
+  animation: rise-in 240ms ease both;
+}
+
 .summary-card,
 .panel,
 .insight-strip {
@@ -279,6 +313,132 @@ main {
   margin-bottom: 16px;
   padding: 12px;
   animation: rise-in 520ms 120ms ease both;
+}
+
+.bank-panel {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(260px, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 14px;
+}
+
+.bank-copy {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 14px;
+  min-height: 76px;
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--surface-soft);
+}
+
+.bank-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #2563eb;
+  box-shadow: 0 14px 26px rgba(37, 99, 235, 0.22);
+}
+
+.bank-copy p {
+  margin: 0 0 4px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.bank-copy h2 {
+  margin: 0 0 4px;
+  color: var(--text-strong);
+  font-size: 1.18rem;
+}
+
+.bank-copy span,
+.bank-status {
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+.bank-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.bank-actions .primary-button,
+.bank-actions .secondary-button {
+  grid-column: auto;
+  min-height: 42px;
+  padding: 0 14px;
+}
+
+.bank-status {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.connected-account-list {
+  grid-column: 1 / -1;
+}
+
+.account-source-control label {
+  height: 100%;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--surface-soft);
+}
+
+.account-source-control select {
+  min-height: 48px;
+  border-color: rgba(37, 99, 235, 0.36);
+  font-weight: 900;
+}
+
+.connected-account-list {
+  display: grid;
+  gap: 10px;
+}
+
+.connected-account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--surface-soft);
+}
+
+.connected-account strong,
+.connected-account span {
+  display: block;
+}
+
+.connected-account strong {
+  margin-bottom: 4px;
+  color: var(--text-strong);
+}
+
+.connected-account span {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.danger-soft {
+  flex: 0 0 auto;
+  color: #b42318;
+  background: #fff1f0;
 }
 
 .insight-item {
@@ -383,6 +543,7 @@ main {
 
 .controls-workspace {
   display: block;
+  margin-bottom: 0;
 }
 
 .controls-workspace .filters {
@@ -858,6 +1019,7 @@ tbody tr:hover {
   }
 
   .app-header,
+  .bank-panel,
   .charts-grid,
   .workspace {
     display: block;
@@ -878,8 +1040,24 @@ tbody tr:hover {
   }
 
   .filters,
+  .bank-actions,
   .trend-panel {
     margin-top: 16px;
+  }
+
+  .bank-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .account-source-control label,
+  .bank-copy {
+    margin-top: 12px;
+  }
+
+  .connected-account {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .controls-workspace .filters {
@@ -913,6 +1091,10 @@ tbody tr:hover {
 
   .header-actions {
     flex-wrap: wrap;
+  }
+
+  .bank-actions {
+    grid-template-columns: 1fr;
   }
 
   .header-actions span {

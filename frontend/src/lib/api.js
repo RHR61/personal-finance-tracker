@@ -51,6 +51,7 @@ export function getTransactions(filters = {}) {
   if (activeFilters.type) params.set("type", activeFilters.type);
   if (activeFilters.startDate) params.set("start_date", activeFilters.startDate);
   if (activeFilters.endDate) params.set("end_date", activeFilters.endDate);
+  if (activeFilters.source && activeFilters.source !== "all") params.set("source", activeFilters.source);
 
   const query = params.toString();
   return request(`/transactions${query ? `?${query}` : ""}`, { token });
@@ -75,6 +76,13 @@ export function getDashboardSummary(token) {
   return request("/dashboard/summary", { token });
 }
 
+export function getDashboardSummaryForSource(token, source = "all") {
+  const params = new URLSearchParams();
+  if (source && source !== "all") params.set("source", source);
+  const query = params.toString();
+  return request(`/dashboard/summary${query ? `?${query}` : ""}`, { token });
+}
+
 export function registerUser(user) {
   return request("/auth/register", {
     method: "POST",
@@ -91,4 +99,47 @@ export function loginUser(credentials) {
 
 export function getCurrentUser(token) {
   return request("/auth/me", { token });
+}
+
+export function createPlaidLinkToken(token) {
+  return request("/bank/link-token", {
+    method: "POST",
+    token,
+  });
+}
+
+export function exchangePlaidPublicToken(exchange, token) {
+  return request("/bank/exchange", {
+    method: "POST",
+    token,
+    body: JSON.stringify(exchange),
+  });
+}
+
+export function syncBankTransactions(token) {
+  return request("/bank/sync", {
+    method: "POST",
+    token,
+  });
+}
+
+export function getBankConnections(token) {
+  return request("/bank/connections", { token });
+}
+
+export function disconnectBankConnection(id, token) {
+  return request(`/bank/connections/${id}`, {
+    method: "DELETE",
+    token,
+  });
+}
+
+export function resetStandaloneTransactions(token, includeLegacyImports = false) {
+  const params = new URLSearchParams();
+  if (includeLegacyImports) params.set("include_legacy_imports", "true");
+
+  return request(`/transactions/standalone${params.toString() ? `?${params}` : ""}`, {
+    method: "DELETE",
+    token,
+  });
 }

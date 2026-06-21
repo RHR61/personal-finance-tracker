@@ -4,7 +4,7 @@ Full-stack personal finance tracker built with React, FastAPI, PostgreSQL, and C
 
 ## Current Phase
 
-Phase 5 adds account registration, login, JWT authentication, password hashing, and user-scoped transactions.
+Phase 5.5 adds account registration, login, JWT authentication, user-scoped transactions, and Plaid Sandbox bank connections.
 
 ## Backend Setup
 
@@ -15,6 +15,14 @@ docker compose up -d
 ```
 
 Copy `backend/.env.example` to `backend/.env` and adjust the connection string if needed.
+
+For Plaid Sandbox bank connections, add your Plaid Sandbox keys to `backend/.env`:
+
+```bash
+PLAID_ENV=sandbox
+PLAID_CLIENT_ID=your-plaid-client-id
+PLAID_SECRET=your-plaid-sandbox-secret
+```
 
 ```bash
 cd backend
@@ -52,6 +60,10 @@ alembic upgrade head
 - `POST /auth/register`
 - `POST /auth/login`
 - `GET /auth/me`
+- `POST /bank/link-token`
+- `POST /bank/exchange`
+- `POST /bank/sync`
+- `GET /bank/connections`
 - `POST /transactions`
 - `GET /transactions`
 - `GET /transactions/{transaction_id}`
@@ -60,6 +72,7 @@ alembic upgrade head
 - `GET /dashboard/summary`
 
 Transaction and dashboard endpoints require a bearer token after login.
+Bank endpoints also require a bearer token and use Plaid Sandbox credentials.
 
 ## Frontend Setup
 
@@ -101,4 +114,5 @@ VITE_API_BASE_URL=http://127.0.0.1:8000
 3. React frontend
 4. Charts and dashboard
 5. Authentication
-6. Deployment
+6. Bank connections
+7. Deployment

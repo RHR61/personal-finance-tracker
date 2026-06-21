@@ -47,6 +47,7 @@ export default function TransactionTable({ transactions, onDelete }) {
             <tr>
               <th>Date</th>
               <th>Category</th>
+              <th>Source</th>
               <th>Description</th>
               <th>Type</th>
               <th className="amount-cell">Amount</th>
@@ -56,7 +57,7 @@ export default function TransactionTable({ transactions, onDelete }) {
           <tbody>
             {transactions.length === 0 ? (
               <tr>
-                <td className="empty-state" colSpan="6">
+                <td className="empty-state" colSpan="7">
                   No transactions found.
                 </td>
               </tr>
@@ -65,6 +66,7 @@ export default function TransactionTable({ transactions, onDelete }) {
                 <tr key={transaction.id} style={{ "--row-index": index }}>
                   <td>{transaction.date}</td>
                   <td>{transaction.category}</td>
+                  <td>{transaction.source_name || "Standalone"}</td>
                   <td>{transaction.description || "-"}</td>
                   <td>
                     <span className={`type-pill ${transaction.type}`}>{transaction.type}</span>
