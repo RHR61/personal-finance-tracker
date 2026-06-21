@@ -4,7 +4,7 @@ Full-stack personal finance tracker built with React, FastAPI, PostgreSQL, and C
 
 ## Current Phase
 
-Phase 3 adds a React frontend that connects to the FastAPI transaction and dashboard endpoints.
+Phase 4 adds Chart.js dashboard visuals for spending by category and monthly expense trends.
 
 ## Backend Setup
 

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
+import DashboardCharts from "./components/DashboardCharts.jsx";
 import SummaryCards from "./components/SummaryCards.jsx";
 import TransactionFilters from "./components/TransactionFilters.jsx";
 import TransactionForm from "./components/TransactionForm.jsx";
@@ -103,6 +104,8 @@ export default function App() {
 
       <SummaryCards summary={summary} />
 
+      <DashboardCharts transactions={transactions} />
+
       <section className="workspace">
         <TransactionForm onSubmit={handleCreateTransaction} isSubmitting={isSubmitting} />
         <TransactionFilters filters={filters} onChange={setFilters} onReset={resetFilters} />
@@ -116,4 +119,3 @@ export default function App() {
     </main>
   );
 }
-

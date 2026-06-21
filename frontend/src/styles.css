@@ -108,6 +108,38 @@ main {
   color: #c2413b;
 }
 
+.charts-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.15fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.chart-panel {
+  min-height: 360px;
+}
+
+.chart-frame {
+  position: relative;
+  height: 280px;
+}
+
+.trend-panel .chart-frame {
+  height: 292px;
+}
+
+.chart-empty {
+  display: grid;
+  min-height: 280px;
+  place-items: center;
+  border: 1px dashed #cbd5df;
+  border-radius: 8px;
+  color: #64748b;
+  background: #f8fafc;
+  font-weight: 800;
+  text-align: center;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
@@ -303,6 +335,7 @@ th {
   }
 
   .app-header,
+  .charts-grid,
   .workspace {
     display: block;
   }
@@ -318,6 +351,10 @@ th {
   .filters {
     margin-top: 16px;
   }
+
+  .trend-panel {
+    margin-top: 16px;
+  }
 }
 
 @media (max-width: 560px) {
@@ -330,4 +367,3 @@ th {
     font-size: 1.85rem;
   }
 }
-
