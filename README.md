@@ -2,9 +2,26 @@
 
 Full-stack personal finance tracker built with React, FastAPI, PostgreSQL, and Chart.js.
 
-## Current Phase
+## Live Deployment
 
-Phase 5.5 adds account registration, login, JWT authentication, user-scoped transactions, and Plaid Sandbox bank connections.
+- Frontend: https://personal-finance-tracker-three-rho.vercel.app
+- API health check: https://personal-finance-tracker-e81p.onrender.com/health
+
+## Project Status
+
+The app is deployed and supports account registration, login, JWT authentication, user-scoped transactions, dashboard charts, account-level filtering, Plaid Sandbox bank connections, and standalone manual tracking.
+
+## Features
+
+- Register and log in with a username or email
+- Add, edit, delete, sort, and filter manual transactions
+- Connect test bank accounts through Plaid Sandbox
+- View all accounts, standalone transactions, or individual bank accounts separately
+- Sync and disconnect bank connections
+- Reset standalone data without deleting bank-imported transactions
+- View income, expenses, remaining balance, spending by category, and spending trends
+- Toggle light and dark mode
+- Collapse dashboard sections for a cleaner view
 
 ## Backend Setup
 
@@ -125,15 +142,15 @@ VITE_API_BASE_URL=http://127.0.0.1:8000
 
 ## Deployment
 
-Recommended deployment split:
+Deployment split:
 
 - Backend API: Render Web Service
-- Database: Render PostgreSQL
+- Database: Neon PostgreSQL
 - Frontend: Vercel
 
 ### Render Backend
 
-Create a PostgreSQL database on Render first, then create a Render Web Service from this GitHub repo.
+Create a Render Web Service from this GitHub repo.
 
 Use these settings:
 
@@ -148,7 +165,7 @@ Render provides a `PORT` environment variable automatically. The `backend/start.
 Add these environment variables to the Render backend service:
 
 ```text
-DATABASE_URL=<Render PostgreSQL internal database URL>
+DATABASE_URL=<Neon PostgreSQL connection string>
 SECRET_KEY=<long random secret string>
 FRONTEND_ORIGINS=<your Vercel frontend URL>
 PLAID_ENV=sandbox
@@ -198,7 +215,7 @@ After Vercel deploys, copy the Vercel URL into the Render backend `FRONTEND_ORIG
 ### Deployment Order
 
 1. Push the latest code to GitHub.
-2. Create the Render PostgreSQL database.
+2. Create the Neon PostgreSQL database.
 3. Create and deploy the Render backend.
 4. Create and deploy the Vercel frontend.
 5. Update Render `FRONTEND_ORIGINS` with the Vercel URL.
@@ -220,10 +237,18 @@ After Vercel deploys, copy the Vercel URL into the Render backend `FRONTEND_ORIG
 
 ## Roadmap
 
-1. FastAPI backend
-2. PostgreSQL database
-3. React frontend
-4. Charts and dashboard
-5. Authentication
-6. Bank connections
-7. Deployment
+1. FastAPI backend - complete
+2. PostgreSQL database - complete
+3. React frontend - complete
+4. Charts and dashboard - complete
+5. Authentication - complete
+6. Bank connections - complete
+7. Deployment - complete
+
+## Future Improvements
+
+- Password reset by email
+- Production Plaid access after approval
+- Export transactions to CSV
+- Custom categories and budgets
+- More detailed account-specific dashboard views
