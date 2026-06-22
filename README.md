@@ -235,17 +235,8 @@ After Vercel deploys, copy the Vercel URL into the Render backend `FRONTEND_ORIG
 }
 ```
 
-## Roadmap
 
-1. FastAPI backend - complete
-2. PostgreSQL database - complete
-3. React frontend - complete
-4. Charts and dashboard - complete
-5. Authentication - complete
-6. Bank connections - complete
-7. Deployment - complete
-
-## Future Improvements
+## Potential Future Improvements
 
 - Password reset by email
 - Production Plaid access after approval
