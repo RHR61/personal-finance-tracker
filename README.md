@@ -11,6 +11,15 @@ Full-stack personal finance tracker built with React, FastAPI, PostgreSQL, and C
 
 The app is deployed and supports account registration, login, JWT authentication, user-scoped transactions, dashboard charts, account-level filtering, Plaid Sandbox bank connections, and standalone manual tracking.
 
+## Tech Stack
+
+- Frontend: React, Vite, Chart.js, Lucide React
+- Backend: FastAPI, SQLAlchemy, Alembic, JWT authentication
+- Database: PostgreSQL, deployed with Neon
+- Bank data: Plaid Sandbox
+- Deployment: Vercel frontend, Render backend
+- Local tooling: Docker Compose, Python virtual environment, npm
+
 ## Features
 
 - Register and log in with a username or email
@@ -22,6 +31,26 @@ The app is deployed and supports account registration, login, JWT authentication
 - View income, expenses, remaining balance, spending by category, and spending trends
 - Toggle light and dark mode
 - Collapse dashboard sections for a cleaner view
+
+## Demo Login and Sandbox Testing
+
+Create a new account in the deployed app to test manual transactions, filters, charts, theme switching, and account-specific dashboard views.
+
+Plaid bank linking uses Sandbox mode. After logging into the app, click **Connect bank**, choose **Continue without phone number** if prompted, then use Plaid's test credentials:
+
+```text
+Username: user_good
+Password: pass_good
+```
+
+For richer imported transaction history, use:
+
+```text
+Username: user_transactions_dynamic
+Password: any non-empty password
+```
+
+Plaid Sandbox data is fake test data and does not connect to real financial accounts.
 
 ## Backend Setup
 
