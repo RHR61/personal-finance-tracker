@@ -1,12 +1,13 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000").replace(/\/$/, "");
 
 async function request(path, options = {}) {
   const { token, ...fetchOptions } = options;
+  const requestUrl = `${API_BASE_URL}${path}`;
 
   let response;
 
   try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
+    response = await fetch(requestUrl, {
       headers: {
         "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -15,7 +16,7 @@ async function request(path, options = {}) {
       ...fetchOptions,
     });
   } catch (error) {
-    throw new Error("Could not reach the API server. Make sure FastAPI is running.");
+    throw new Error(`Could not reach the API server at ${API_BASE_URL}. Check the API URL and CORS settings.`);
   }
 
   if (!response.ok) {
